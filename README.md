@@ -18,7 +18,7 @@ while not game.has_current_player_won do
   puts "Current player: #{game.current_player}"
   puts "From which house do you want to sow?"
   begin
-    sow gets.to_i # Sow house.
+    game.sow gets.to_i # Sow house.
   rescue Kalah::IllegalMoveError => e
     puts e
   end
