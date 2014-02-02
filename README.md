@@ -7,6 +7,7 @@ Kalah is a Ruby based Kalah/Kalaha/Mancala engine. Useful for making intelligent
     gem install kalah
 
 # Usage 
+The following is an example of a simple interactive Kalah game.
 ```
 require 'kalah'
 
