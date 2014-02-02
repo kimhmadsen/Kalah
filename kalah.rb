@@ -13,8 +13,9 @@ class Kalah
   @stores
   @history
   @current_player
+  @num_seeds
 
-  attr_reader :stores, :history, :current_player
+  attr_reader :stores, :history, :current_player, :num_seeds
 
   def initialize(num_seeds = 6)
     @stores = Array.new(NUM_HOUSES * 2 + 2, num_seeds)
@@ -22,6 +23,7 @@ class Kalah
     @stores[STORE_INDEX_P2] = 0
     @history = Array.new
     @current_player = :P1
+    @num_seeds = num_seeds
   end
 
   def sow(index)
@@ -53,6 +55,7 @@ class Kalah
          (@current_player == :P2 and house == STORE_INDEX_P1)
         # Skip opponent's store.
         i += 1
+        next
       end
 
       @stores[house] += 1
@@ -61,7 +64,9 @@ class Kalah
     end
 
     # If last seed lands in empty house (size now 1), take opposite store.
-    if @stores[(index + i - 1) % @stores.length] == 1
+    if current_players_houses.cover?((index + i - 1) % @stores.length) and
+        i > NUM_HOUSES and
+        @stores[(index + i - 1) % @stores.length] == 1
       opposite = NUM_HOUSES * 2 - ((index + i - 1) % @stores.length)
       # Put to store.
       @stores[current_players_store] += @stores[opposite]
@@ -79,7 +84,7 @@ class Kalah
         range = player_2_houses
         store = STORE_INDEX_P1
       else
-        range = player_1 houses
+        range = player_1_houses
         store = STORE_INDEX_P2
       end
 
@@ -90,7 +95,7 @@ class Kalah
     end
 
     # Change turn if last seed did not land in own store.
-    if (index + i - 1) % @stores.length != current_players_store
+    if !has_current_player_won and (index + i - 1) % @stores.length != current_players_store
       @current_player = @current_player == :P1 ? :P2 : :P1
     end
   end
