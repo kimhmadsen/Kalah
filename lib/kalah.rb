@@ -16,7 +16,8 @@ class Kalah
   @num_seeds
 
   attr_reader :stores, :history, :current_player, :num_seeds
-
+  
+  # Initializes a new Kalah engine, optionally with the default number of seeds in each house.
   def initialize(num_seeds = 6)
     @stores = Array.new(NUM_HOUSES * 2 + 2, num_seeds)
     @stores[STORE_INDEX_P1] = 0
@@ -25,7 +26,8 @@ class Kalah
     @current_player = :P1
     @num_seeds = num_seeds
   end
-
+  
+  # Sows the seeds from the given index.
   def sow(index)
     if index < 0 or index > @stores.length
       raise IllegalMoveError, "Index #{i} does not exist (Number of houses is #{@stores.length})"
