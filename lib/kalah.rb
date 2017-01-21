@@ -12,12 +12,6 @@ class Kalah
   STORE_INDEX_P1 = NUM_HOUSES
   STORE_INDEX_P2 = NUM_HOUSES * 2 + 1
 
-  # Holds the number of seeds in each house.
-  @stores
-  @history
-  @current_player
-  @num_seeds
-
   attr_reader :stores, :history, :current_player, :num_seeds
   
   # Initializes a new Kalah engine, optionally with the default number of seeds in each house.
@@ -107,9 +101,9 @@ class Kalah
         store = STORE_INDEX_P2
       end
 
-      range.each do |i|
-        @stores[store] += @stores[i]
-        @stores[i] = 0
+      range.each do |j|
+        @stores[store] += @stores[j]
+        @stores[j] = 0
       end
     end
 
