@@ -44,6 +44,7 @@ class KalahTest < Minitest::Test
     game = Kalah.new(1)
     game.play(6)
     seeds = game.stores[game.current_players_store]
+    assert_equal(1, seeds)
   end
 
   def test_if_last_seeds_ends_in_store_current_remains_turn
