@@ -29,7 +29,21 @@ class Kalah
     @current_player = :P1
     @num_seeds = num_seeds
   end
-  
+
+  # Play be selecting a house number (1-6) instead of giving an index to sow
+  def play(house)
+    if house < 1 or house > NUM_HOUSES
+      raise IllegalMoveError, "House #{house} does not exist
+      (House should between 1 and #{NUM_HOUSES})"
+    end
+    if @current_player == :P1
+      index = house - 1
+    else
+      index = house + NUM_HOUSES
+    end
+    sow(index)
+  end
+
   # Sows the seeds from the given index.
   def sow(index)
     if index < 0 or index > @stores.length
