@@ -1,3 +1,6 @@
+require "kalah/version"
+
+module Kalah
 class Kalah
 
   class IllegalMoveError < StandardError; end
@@ -173,4 +176,5 @@ class Kalah
 
   end
 
+end
 end
